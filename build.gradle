@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'App'
+
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.d-1815350400:stack:master-SNAPSHOT'
+
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+run {
+    standardInput = System.in
+}
