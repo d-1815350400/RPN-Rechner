@@ -46,9 +46,16 @@ public class Rechner {
         sc.close();
     }
 
-    public Double berechne(String s) throws IllegalArgumentException {
+    public Double evaluiere(String s) {
+        return berechne(s);
+    }
+
+    public Double berechne(String s) {
+        return berechne(s.trim().split("\\s+"));
+    }
+
+    private Double berechne(String[] symbole) throws IllegalArgumentException {
         Stack<Double> stack = new Stack<>();
-        String[] symbole = s.trim().split("\\s+");
         for (String symbol : symbole) {
             // pruefe ob der String in unserer HashMap der Operatoren ist
             // (null falls nicht)
