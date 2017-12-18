@@ -2,10 +2,10 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class App {
-    private static HashMap<String, Operator> operatoren = new HashMap<>();
+public class Rechner {
+    private HashMap<String, Operator> operatoren = new HashMap<>();
 
-    static {
+    public Rechner() {
         operatoren.put("+", (s) -> s.pop() + s.pop());
         operatoren.put("-", (s) -> - s.pop() + s.pop());
         operatoren.put("*", (s) -> s.pop() * s.pop());
@@ -23,6 +23,8 @@ public class App {
     }
 
     public static void main(String[] args) {
+        Rechner rechner = new Rechner();
+
         // erzeugt einen Leser
         Scanner sc = new Scanner(System.in);
 
@@ -34,7 +36,7 @@ public class App {
             // solange es einen naechsten String gibt
 
             // gib das Ergebnis dessen aus
-            System.out.println(berechne(sc.nextLine()));
+            System.out.println(rechner.berechne(sc.nextLine()));
 
             // Aesthetik
             System.out.print(">> ");
@@ -44,7 +46,7 @@ public class App {
         sc.close();
     }
 
-    public static Double berechne(String s) throws IllegalArgumentException {
+    public Double berechne(String s) throws IllegalArgumentException {
         Stack<Double> stack = new Stack<>();
         String[] symbole = s.trim().split("\\s+");
         for (String symbol : symbole) {
